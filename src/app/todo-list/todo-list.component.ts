@@ -18,4 +18,8 @@ export class TodoListComponent implements OnInit {
       this.allTodos = res;
     });
   }
+
+  add(){
+    this.todoService.addTodo(this.todo).subscribe();
+  }
 }
