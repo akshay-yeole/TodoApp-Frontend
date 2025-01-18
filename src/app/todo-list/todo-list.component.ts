@@ -8,6 +8,7 @@ import { Todo } from '../models/todo.model';
   styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent implements OnInit {
+  todo : Todo = { title :'', isCompleted : false};
   allTodos! : Todo[];
 
   constructor(private todoService: TodoService) {}

@@ -1,5 +1,37 @@
-<div>
-    <ul>
-        <li *ngFor="let todo of allTodos">{{ todo.title }}</li>
-    </ul>
-</div>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-9">
+        <div class="card mt-5">
+          <div class="card-header text-center">
+            <h3>To-Do List</h3>
+          </div>
+          <div class="card-body">
+            <!-- Input to add new to-do item -->
+            <div class="mb-3 d-flex">
+                <input
+                  [(ngModel)]="todo.title"
+                  class="form-control border-radius"  
+                  placeholder="Enter a new task"
+                /> &nbsp; 
+                <button class="btn btn-success btn-sm border-radius">Add</button>
+              </div>
+  
+            <!-- List of to-do items -->
+            <ul class="list-group border-radius">
+              <li
+                class="list-group-item d-flex justify-content-between align-items-center"
+                *ngFor="let todo of allTodos; let i = index"
+              >
+                <span>{{ todo.title }}</span>
+                <span>{{ todo.isCompleted ? 'Completed':'In Progress' }}</span>
+                <button class="btn btn-danger btn-sm border-radius">
+                  Remove
+                </button> 
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
