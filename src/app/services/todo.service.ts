@@ -16,8 +16,11 @@ export class TodoService {
   }
 
   addTodo(model : Todo)  : Observable<any> {
-    console.log('add todo called');
     return this.client.post<any>(`${this.apiUrl}`, model, {headers : this.getHeaders()});
+  }
+
+  deleteTodo(id : number) : Observable<any> {
+    return this.client.delete<any>(`${this.apiUrl}/${id}`);
   }
 
   getHeaders(): HttpHeaders {

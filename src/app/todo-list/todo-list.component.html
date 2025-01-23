@@ -24,7 +24,7 @@
               >
                 <span>{{ todo.title }}</span>
                 <span>{{ todo.isCompleted ? 'Completed':'In Progress' }}</span>
-                <button class="btn btn-danger btn-sm border-radius">
+                <button class="btn btn-danger btn-sm border-radius" (click)="delete(todo.id)">
                   Remove
                 </button> 
               </li>

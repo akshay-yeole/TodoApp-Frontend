@@ -8,7 +8,7 @@ import { Todo } from '../models/todo.model';
   styleUrls: ['./todo-list.component.scss'],
 })
 export class TodoListComponent implements OnInit {
-  todo : Todo = { title :'', isCompleted : false};
+  todo : Todo = { id : 0, title :'', isCompleted : false};
   allTodos! : Todo[];
 
   constructor(private todoService: TodoService) {}
@@ -21,5 +21,14 @@ export class TodoListComponent implements OnInit {
 
   add(){
     this.todoService.addTodo(this.todo).subscribe();
+  }
+
+  delete(id : number){
+    this.todoService.deleteTodo(id).subscribe(
+      (res)=>console.log(res), 
+      (err)=>{
+        alert(`${err.error.message} for : ${id}`)
+      }
+    );
   }
 }
