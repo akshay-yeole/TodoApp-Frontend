@@ -23,6 +23,10 @@ export class TodoService {
     return this.client.delete<any>(`${this.apiUrl}/${id}`);
   }
 
+  updateTodo(todo: Todo) : Observable<any> {
+    return this.client.put<any>(`${this.apiUrl}/${todo.id}`,todo, {headers : this.getHeaders()});
+  }
+
   getHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
