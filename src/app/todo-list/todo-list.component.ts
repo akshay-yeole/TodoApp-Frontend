@@ -19,32 +19,32 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.token) {
-      this.loadTodos(this.token);
+      this.loadTodos();
     }
   }
 
-  loadTodos(token : string){
-    this.todoService.getTodos(token).subscribe((res) => {
+  loadTodos(){
+    this.todoService.getTodos().subscribe((res) => {
       this.allTodos = res;
     });
   }
 
   add(){
     this.todoService.addTodo(this.todo).subscribe(
-      (res)=>this.loadTodos(this.token)
+      (res)=>this.loadTodos()
     ); 
   }
 
   delete(id : number){
     this.todoService.deleteTodo(id).subscribe(
-      (res)=>this.loadTodos(this.token)
+      (res)=>this.loadTodos()
     ); 
   }
 
   edit(todo : Todo){
     if(todo.isEditing){
       this.todoService.updateTodo(todo).subscribe(
-        (res)=>this.loadTodos(this.token)
+        (res)=>this.loadTodos()
       );
     }
     todo.isEditing = !todo.isEditing;

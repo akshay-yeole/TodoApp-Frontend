@@ -1,1 +1,17 @@
+<nav class="navbar navbar-light bg-light shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="#">TodoApp</a>
+        <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle me-2" style="font-size: 1.5rem;"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li><span class="dropdown-item-text">Username</span></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><button class="dropdown-item" type="button">Logout</button></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <router-outlet></router-outlet>
