@@ -16,8 +16,9 @@ export class LoginComponent {
   onLogin(): void {
     this.authService.login(this.credentials).subscribe({
       next: (response: any) => {
-        this.authService.saveToken(response.token); // Save JWT token
-        this.router.navigate(['/todos']); // Redirect to Todo List page
+        this.authService.saveToken(response.token);
+        const userProfile = { username : response?.username};
+        this.router.navigate(['/todos']);
       },
       error: () => {
         this.errorMessage = 'Invalid credentials';

@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginRequest } from '../models/login.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:7299/api/Auth'; // Replace with your API endpoint
+  private apiUrl = 'https://localhost:7299/api/Auth';
 
   constructor(private http: HttpClient) {}
 
@@ -22,4 +22,5 @@ export class AuthService {
   saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
+
 }
