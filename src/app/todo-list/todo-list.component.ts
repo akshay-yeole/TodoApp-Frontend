@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../models/todo.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,35 +13,38 @@ export class TodoListComponent implements OnInit {
   allTodos! : Todo[];
   btnLabel : string = "Edit";
   isDisabled : boolean = true;
-
-  constructor(private todoService: TodoService) {}
+  errorMessage = '';
+  token = this.authService.getToken() ?? '';
+  constructor(private todoService: TodoService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.loadTodos();
+    if (this.token) {
+      this.loadTodos(this.token);
+    }
   }
 
-  loadTodos(){
-    this.todoService.getTodos().subscribe((res) => {
+  loadTodos(token : string){
+    this.todoService.getTodos(token).subscribe((res) => {
       this.allTodos = res;
     });
   }
 
   add(){
     this.todoService.addTodo(this.todo).subscribe(
-      (res)=>this.loadTodos()
+      (res)=>this.loadTodos(this.token)
     ); 
   }
 
   delete(id : number){
     this.todoService.deleteTodo(id).subscribe(
-      (res)=>this.loadTodos()
+      (res)=>this.loadTodos(this.token)
     ); 
   }
 
   edit(todo : Todo){
     if(todo.isEditing){
       this.todoService.updateTodo(todo).subscribe(
-        (res)=>this.loadTodos()
+        (res)=>this.loadTodos(this.token)
       );
     }
     todo.isEditing = !todo.isEditing;

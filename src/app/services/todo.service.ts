@@ -11,8 +11,9 @@ export class TodoService {
 
   constructor(private client : HttpClient) { }
 
-  getTodos() : Observable<Todo[]>{
-    return this.client.get<Todo[]>(`${this.apiUrl}`);
+  getTodos(token : string) : Observable<Todo[]>{
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.client.get<Todo[]>(`${this.apiUrl}`, { headers });
   }
 
   addTodo(model : Todo)  : Observable<any> {
