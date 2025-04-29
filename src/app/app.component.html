@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav" style="border-radius: 0px;">
-            <ul class="navbar-nav ms-auto" >
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-person-circle me-2" style="font-size: 1.5rem;"></i>
@@ -26,5 +26,9 @@
         </div>
     </div>
 </nav>
-
+<div class="toaster-container" *ngIf="toasterService.messages.length" >
+    <div *ngFor="let m of toasterService.messages" [ngClass]="m.type == 1 ? 'alert alert-danger d-flex align-items-center mb-2' : 'alert alert-success d-flex align-items-center mb-2'" role="alert" style="border-radius: 0px;">
+        <span>{{ m.message }}</span>
+    </div>
+</div>
 <router-outlet></router-outlet>

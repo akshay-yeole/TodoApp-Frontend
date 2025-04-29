@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('token'); // Retrieve the stored JWT token
+    const token = localStorage.getItem('jwt_token'); 
 
     if (token) {
       const authReq = req.clone({

@@ -4,11 +4,13 @@ import { LoginComponent } from './login/login.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'todos', component: TodoListComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'todos', component: TodoListComponent, canActivate: [AuthGuard] },
+  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({
@@ -18,7 +20,7 @@ const routes: Routes = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true // Ensures multiple interceptors can work together
+      multi: true 
     }
   ],
 })

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../models/todo.model';
 import { AuthService } from '../services/auth.service';
+import { ToasterService } from '../services/toaster.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -15,7 +16,8 @@ export class TodoListComponent implements OnInit {
   isDisabled : boolean = true;
   errorMessage = '';
   token = this.authService.getToken() ?? '';
-  constructor(private todoService: TodoService, private authService: AuthService) {}
+  
+  constructor(private todoService: TodoService, private authService: AuthService, private toasterService : ToasterService) {}
 
   ngOnInit(): void {
     if (this.token) {
@@ -31,7 +33,10 @@ export class TodoListComponent implements OnInit {
 
   add(){
     this.todoService.addTodo(this.todo).subscribe(
-      (res)=>this.loadTodos()
+      (res)=>{
+        this.toasterService.successToaster('Todo added successfully!');
+        this.loadTodos();
+      }
     ); 
   }
 
