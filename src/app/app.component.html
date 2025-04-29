@@ -1,31 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+<nav class="navbar navbar-default">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold" href="#">TodoApp</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav" style="border-radius: 0px;">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle me-2" style="font-size: 1.5rem;"></i>
-                        <span class="fw-semibold">demo</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
-                        <li class="dropdown-header text-center">
-                            <strong>Demo</strong>
-                            <p class="text-muted mb-0" style="font-size: 0.85rem; border: 0;">johndoe&#64;example.com</p>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><button class="dropdown-item d-flex align-items-center" type="button">
-                            <i class="bi bi-box-arrow-right me-2"></i> Logout
-                        </button></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+      <!-- Brand -->
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">MyApp</a>
+      </div>
+  
+      <!-- Navbar Right -->
+    <ul class="navbar-nav ms-auto" *ngIf="isLoggedIn()">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-person"></i> Profile
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+        <li><a class="dropdown-item" (click)="goToProfile()">My Profile</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+        </ul>
+      </li>
+    </ul>
     </div>
-</nav>
+  </nav>
+  
+  <router-outlet></router-outlet>
+  
 <div class="toaster-container" *ngIf="toasterService.messages.length" >
     <div *ngFor="let m of toasterService.messages" [ngClass]="m.type == 1 ? 'alert alert-danger d-flex align-items-center mb-2' : 'alert alert-success d-flex align-items-center mb-2'" role="alert" style="border-radius: 0px;">
         <span>{{ m.message }}</span>
