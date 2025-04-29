@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private apiUrl = 'https://localhost:7299/api/Auth';
-  private tokenKey = 'jwt_token';
+  private token: string | null = null;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -17,11 +17,11 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return this.token;
   }
 
   setToken(token: string) {
-    localStorage.setItem(this.tokenKey, token);
+    this.token = token;
   }
 
   isAuthenticated(): boolean {
@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem(this.tokenKey);
+    this.token = null;
     this.router.navigate(['/login']);
   }
 }
