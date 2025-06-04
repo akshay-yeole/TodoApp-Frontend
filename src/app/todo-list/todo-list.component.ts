@@ -19,7 +19,7 @@ export class TodoListComponent implements OnInit {
   constructor(private todoService: TodoService, private storageService: StorageService, private toasterService : ToasterService) {}
 
   ngOnInit(): void {
-    if (this.storageService.getToken()) {
+    if (this.storageService.accessToken) {
       this.loadTodos();
     }
   }

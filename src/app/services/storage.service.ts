@@ -5,21 +5,21 @@ import { Injectable } from '@angular/core';
 })
 export class StorageService {
   private static KEY_USER_NAME = 'userName';
-  private static KEY_TOKEN = 'token';
+  private static KEY_ACCESS_TOKEN = 'accessToken';
 
-  getUserName(): string  {
+  get userName()  {
     return localStorage.getItem(StorageService.KEY_USER_NAME) ?? '';
   }
 
-  setUserName(userName: string): void {
-    localStorage.setItem(StorageService.KEY_USER_NAME, userName);
+  set userName(value: string) {
+    localStorage.setItem(StorageService.KEY_USER_NAME, value);
   }
 
-  getToken(): string {
-    return localStorage.getItem(StorageService.KEY_TOKEN) ?? '';
+  get accessToken() {
+    return localStorage.getItem(StorageService.KEY_ACCESS_TOKEN) ?? '';
   }
   
-  setToken(token: string): void {
-    localStorage.setItem(StorageService.KEY_TOKEN, token);
+  set accessToken(value: string) {
+    localStorage.setItem(StorageService.KEY_ACCESS_TOKEN, value);
   }
 }

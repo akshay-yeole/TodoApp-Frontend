@@ -18,9 +18,12 @@ export class LoginComponent {
   onLogin(): void {
     this.authService.login(this.credentials).subscribe({
       next: (response: any) => {
-        console.log('Login successful:', response);
-        this.storageService.setUserName(response.username);
-        this.storageService.setToken(response.token);
+        if (!response || !response.username || !response.token) {
+          this.toasterService.errorToaster('Invalid response from server');
+          return;
+        }
+        this.storageService.userName = response.username;
+        this.storageService.accessToken = response.token;
         this.router.navigate(['/todos']);
       },
       error: () => {

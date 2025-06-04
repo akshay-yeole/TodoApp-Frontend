@@ -16,8 +16,8 @@ export class AppComponent implements OnInit {
   constructor(public toasterService: ToasterService, private storageService : StorageService, private router: Router) { }
   
   ngOnInit(): void {
-    this.userInfo.name  = this.storageService.getUserName();
-    this.userInfo.token = this.storageService.getToken();
+    this.userInfo.name  = this.storageService.userName;
+    this.userInfo.token = this.storageService.accessToken;
   }
 
   logout(): void {
