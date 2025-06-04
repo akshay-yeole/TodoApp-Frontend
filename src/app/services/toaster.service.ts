@@ -20,4 +20,8 @@ export class ToasterService {
     await timer(time).toPromise();
     this.messages.shift();
   }
+
+  removeMessage(index: number): void {
+    this.messages.splice(index, 1);
+  }
 }

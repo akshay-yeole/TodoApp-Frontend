@@ -41,7 +41,10 @@ export class TodoListComponent implements OnInit {
 
   delete(id : number){
     this.todoService.deleteTodo(id).subscribe(
-      (res)=>this.loadTodos()
+      (res)=>{
+        this.loadTodos();
+        this.toasterService.successToaster('Todo deleted successfully!');
+      }
     ); 
   }
 

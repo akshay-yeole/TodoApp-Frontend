@@ -6,12 +6,15 @@ import { AuthInterceptor } from './auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './services/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'todos', component: TodoListComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'login' }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({
@@ -21,8 +24,8 @@ const routes: Routes = [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true 
-    }
+      multi: true,
+    },
   ],
 })
 export class AppRoutingModule {}

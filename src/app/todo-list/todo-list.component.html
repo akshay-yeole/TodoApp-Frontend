@@ -20,7 +20,7 @@
               <input type="text" class="form-control" [(ngModel)]="todo.title" [disabled]="!todo.isEditing" /> &nbsp;
               <input type="text" class="form-control" [(ngModel)]="todo.isCompleted" [disabled]="!todo.isEditing" />&nbsp;
               <button class="btn btn-primary btn-sm border-radius" (click)="edit(todo)">{{todo.isEditing ? 'Save' : 'Edit'}}</button> &nbsp;
-              <button class="btn btn-danger btn-sm border-radius" (click)="delete(todo.id)">
+              <button *ngIf="!todo.isEditing" class="btn btn-danger btn-sm border-radius" (click)="delete(todo.id)">
                 Remove
               </button>
             </li>

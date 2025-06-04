@@ -5,3 +5,22 @@
     z-index: 1050;
     max-width: 300px;
 }
+
+.notification-content {
+    color: #232323;
+    font-size: .875rem;
+    line-height: 1.5;
+}
+
+.notification-success {
+    border-color: #648d18;
+    color: #648d18;
+}
+
+.notification-title {
+    color: #353535;
+    font-size: .875rem;
+    font-weight: 500;
+    line-height: 1.29;
+    margin-bottom: .25rem;
+}

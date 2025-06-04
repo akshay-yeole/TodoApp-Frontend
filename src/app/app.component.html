@@ -1,32 +1,50 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">MyApp</a>
-      </div>
-  
-      <!-- Navbar Right -->
-    <ul class="navbar-nav ms-auto" *ngIf="userInfo.name">
+<nav *ngIf="userInfo.name" class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">MyApp</a>
+    </div>
+
+    <!-- Navbar Right -->
+    <ul class="navbar-nav ms-auto">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa fa-user me-2"></i>
-            <span>{{ userInfo.name || 'User Profile' }}</span>
+        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa fa-user me-2"></i>
+          <span>{{ userInfo.name || 'User Profile' }}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-        <li><a class="dropdown-item" (click)="goToProfile()">My Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+          <li><a class="dropdown-item" (click)="goToProfile()">My Profile</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
         </ul>
       </li>
     </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+
+<div class="toaster-container" *ngIf="toasterService.messages.length">
+  <div *ngFor="let m of toasterService.messages; let i = index"
+    [ngClass]="m.type == 1 ? 'alert alert-danger position-relative mb-2' : 'alert alert-success position-relative mb-2'"
+    role="alert" [style.border-left-color]="m.type == 1 ? 'red' : 'green'"
+    style="border: 1px solid; border-left: 4px solid; border-radius: 0px; color: black; background-color: white; padding: 10px; width: 300px;">
+    <button type="button" class="btn-close position-absolute top-0 end-0 m-2" aria-label="Close"
+      (click)="toasterService.removeMessage(i)" style="font-size: 0.8rem;"></button>
+    <div>
+      <div class="d-flex align-items-center">
+        <i [ngClass]="m.type == 1 ? 'fa fa-times-circle text-danger me-2' : 'fa fa-check-circle text-success me-2'"></i>
+        <p class="notification-title">
+          {{ m.type == 1 ? 'Error ' : 'Success ' }}
+        </p>
+      </div>
+      <p  class="notification-content">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ m.message }}
+      </p>
     </div>
-  </nav>
-  
-  <router-outlet></router-outlet>
-  
-<div class="toaster-container" *ngIf="toasterService.messages.length" >
-    <div *ngFor="let m of toasterService.messages" [ngClass]="m.type == 1 ? 'alert alert-danger d-flex align-items-center mb-2' : 'alert alert-success d-flex align-items-center mb-2'" role="alert" style="border-radius: 0px;">
-        <span>{{ m.message }}</span>
-    </div>
+  </div>
 </div>
+
 <router-outlet></router-outlet>
