@@ -6,10 +6,11 @@
       </div>
   
       <!-- Navbar Right -->
-    <ul class="navbar-nav ms-auto" *ngIf="isLoggedIn()">
+    <ul class="navbar-nav ms-auto" >
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-person"></i> Profile
+            <span class="glyphicon glyphicon-user"></span>
+            {{ userInfo?.name || 'User Profile' }}
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
         <li><a class="dropdown-item" (click)="goToProfile()">My Profile</a></li>

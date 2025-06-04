@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { Todo } from '../models/todo.model';
-import { AuthService } from '../services/auth.service';
 import { ToasterService } from '../services/toaster.service';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -15,12 +15,11 @@ export class TodoListComponent implements OnInit {
   btnLabel : string = "Edit";
   isDisabled : boolean = true;
   errorMessage = '';
-  token = this.authService.getToken() ?? '';
   
-  constructor(private todoService: TodoService, private authService: AuthService, private toasterService : ToasterService) {}
+  constructor(private todoService: TodoService, private storageService: StorageService, private toasterService : ToasterService) {}
 
   ngOnInit(): void {
-    if (this.token) {
+    if (this.storageService.getToken()) {
       this.loadTodos();
     }
   }
@@ -48,9 +47,15 @@ export class TodoListComponent implements OnInit {
 
   edit(todo : Todo){
     if(todo.isEditing){
-      this.todoService.updateTodo(todo).subscribe(
-        (res)=>this.loadTodos()
-      );
+      console.log(todo);
+      this.todoService.updateTodo(todo).subscribe({
+        next: (response: any) => {
+          this.loadTodos();
+        },
+        error: (err) => {
+          this.toasterService.errorToaster('Error occured', err);
+        }
+      });
     }
     todo.isEditing = !todo.isEditing;
   }

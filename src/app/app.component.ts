@@ -2,23 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { ToasterService } from './services/toaster.service';
 import { Router } from '@angular/router';
+import { StorageService } from './services/storage.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   toasterMessages: string ='';
+  userInfo: { name?: string; token?: string } = { name: '', token: '' };
 
-  constructor(public toasterService: ToasterService, private authService: AuthService, private router: Router) { }
-
-  isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+  constructor(public toasterService: ToasterService, private storageService : StorageService, private router: Router) { }
+  
+  ngOnInit(): void {
+    this.userInfo.name  = this.storageService.getUserName();
+    this.userInfo.token = this.storageService.getToken();
   }
 
   logout(): void {
-    this.authService.logout();
   }
 
   goToProfile(): void {

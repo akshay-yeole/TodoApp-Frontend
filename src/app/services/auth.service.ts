@@ -16,29 +16,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
 
-  getToken(): string | null {
-    return this.token;
-  }
-
-  setToken(token: string) {
-    this.token = token;
-  }
-
-  isAuthenticated(): boolean {
-    const token = this.getToken();
-    if (!token) return false;
-
-    // Optionally: check if token is expired
-    try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return Date.now() / 1000 < payload.exp;
-    } catch {
-      return false;
-    }
-  }
 
   logout() {
     this.token = null;
     this.router.navigate(['/login']);
   }
+
 }
