@@ -7,7 +7,7 @@ export class StorageService {
   private static KEY_USER_NAME = 'userName';
   private static KEY_ACCESS_TOKEN = 'accessToken';
 
-  get userName()  {
+  get userName() {
     return localStorage.getItem(StorageService.KEY_USER_NAME) ?? '';
   }
 
@@ -18,8 +18,13 @@ export class StorageService {
   get accessToken() {
     return localStorage.getItem(StorageService.KEY_ACCESS_TOKEN) ?? '';
   }
-  
+
   set accessToken(value: string) {
     localStorage.setItem(StorageService.KEY_ACCESS_TOKEN, value);
+  }
+
+  logout() {
+    localStorage.removeItem(StorageService.KEY_USER_NAME);
+    localStorage.removeItem(StorageService.KEY_ACCESS_TOKEN);
   }
 }

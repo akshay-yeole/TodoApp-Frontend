@@ -5,11 +5,12 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { AuthInterceptor } from './auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './services/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'todos', component: TodoListComponent, canActivate: [AuthGuard] },
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'login' }
 ];
 

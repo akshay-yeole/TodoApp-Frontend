@@ -6,11 +6,11 @@
       </div>
   
       <!-- Navbar Right -->
-    <ul class="navbar-nav ms-auto" >
+    <ul class="navbar-nav ms-auto" *ngIf="userInfo.name">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <span class="glyphicon glyphicon-user"></span>
-            {{ userInfo?.name || 'User Profile' }}
+        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-user me-2"></i>
+            <span>{{ userInfo.name || 'User Profile' }}</span>
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
         <li><a class="dropdown-item" (click)="goToProfile()">My Profile</a></li>

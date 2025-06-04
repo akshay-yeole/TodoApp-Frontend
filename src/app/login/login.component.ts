@@ -27,7 +27,7 @@ export class LoginComponent {
         this.router.navigate(['/todos']);
       },
       error: () => {
-        this.toasterService.errorToaster('Invalid credentials');
+        this.toasterService.errorToaster('Username or password is incorrect');
       }
     });
   }

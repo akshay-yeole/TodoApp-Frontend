@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(private storageService : StorageService, private router: Router) {}
 
   canActivate(): boolean {
+    
     const isoggedIn = this.storageService.accessToken ? true : false;
     
     if (isoggedIn) {

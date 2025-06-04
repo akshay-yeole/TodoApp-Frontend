@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
 import { ToasterService } from './services/toaster.service';
 import { Router } from '@angular/router';
 import { StorageService } from './services/storage.service';
@@ -11,7 +10,7 @@ import { StorageService } from './services/storage.service';
 })
 export class AppComponent implements OnInit {
   toasterMessages: string ='';
-  userInfo: { name?: string; token?: string } = { name: '', token: '' };
+  userInfo: { name: string; token: string } = { name: '', token: '' };
 
   constructor(public toasterService: ToasterService, private storageService : StorageService, private router: Router) { }
   
@@ -21,6 +20,8 @@ export class AppComponent implements OnInit {
   }
 
   logout(): void {
+    this.storageService.logout();
+    this.router.navigate(['/login']);
   }
 
   goToProfile(): void {
