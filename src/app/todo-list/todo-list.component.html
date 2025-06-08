@@ -13,18 +13,33 @@
             <button type="submit" class="btn btn-success btn-sm border-radius" (click)="add()">Add</button>
           </div>
 
-          <!-- List of to-do items -->
+            <!-- List of to-do items -->
             <ul class="list-group border-radius">
-            <li class="list-group-item d-flex justify-content-between align-items-center"
-              *ngFor="let todo of allTodos; let i = index">
+              <li 
+              class="list-group-item d-flex justify-content-between align-items-center"
+              *ngFor="let todo of allTodos; let i = index"
+              [class.table-success]="todo.isCompleted"
+              [ngClass]="{'text-decoration-line-through': todo.isCompleted}"
+              >
+              <input type="checkbox" [(ngModel)]="todo.isCompleted" (change)="toggleCompletion(todo)" /> &nbsp;
               <input type="text" class="form-control" [(ngModel)]="todo.title" [disabled]="!todo.isEditing" /> &nbsp;
-              <input type="text" class="form-control" [(ngModel)]="todo.isCompleted" [disabled]="!todo.isEditing" />&nbsp;
-              <button class="btn btn-primary btn-sm border-radius" (click)="edit(todo)">{{todo.isEditing ? 'Save' : 'Edit'}}</button> &nbsp;
-              <button *ngIf="!todo.isEditing" class="btn btn-danger btn-sm border-radius" (click)="delete(todo.id)">
+              <button 
+                class="btn btn-primary btn-sm border-radius" 
+                (click)="edit(todo)" 
+                [disabled]="todo.isCompleted"
+              >
+                {{todo.isEditing ? 'Save' : 'Edit'}}
+              </button> &nbsp;
+              <button 
+                *ngIf="!todo.isEditing" 
+                class="btn btn-danger btn-sm border-radius" 
+                (click)="delete(todo.id)" 
+                [disabled]="todo.isCompleted"
+              >
                 Remove
               </button>
-            </li>
-          </ul>
+              </li>
+            </ul>
         </div>
       </div>
     </div>

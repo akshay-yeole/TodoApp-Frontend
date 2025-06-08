@@ -16,7 +16,11 @@ export class TodoListComponent implements OnInit {
   isDisabled : boolean = true;
   errorMessage = '';
   
-  constructor(private todoService: TodoService, private storageService: StorageService, private toasterService : ToasterService) {}
+  constructor(
+    private todoService: TodoService, 
+    private storageService: StorageService, 
+    private toasterService : ToasterService
+  ) {}
 
   ngOnInit(): void {
     if (this.storageService.accessToken) {
@@ -33,10 +37,24 @@ export class TodoListComponent implements OnInit {
   add(){
     this.todoService.addTodo(this.todo).subscribe(
       (res)=>{
+        this.todo = { id: 0, title: '', isCompleted: false }; // Reset the todo object
         this.toasterService.successToaster('Todo added successfully!');
         this.loadTodos();
       }
     ); 
+  }
+
+  toggleCompletion(todo: Todo) {
+    //todo.isCompleted = !todo.isCompleted;
+    this.todoService.updateTodo(todo).subscribe({
+      next: (response: any) => {
+        this.loadTodos();
+        this.toasterService.successToaster('Todo updated successfully!');
+      },
+      error: (err) => {
+        this.toasterService.errorToaster('Error occured', err);
+      }
+    });
   }
 
   delete(id : number){
